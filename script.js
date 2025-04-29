@@ -32,7 +32,6 @@ function toggleDiscount() {
   calculateGrandTotal();
 }
 
-// Calculate grand total
 function calculateGrandTotal() {
   let total = 0;
 
@@ -61,6 +60,10 @@ function calculateGrandTotal() {
 
   // Prevent negative total
   if (total < 0) total = 0;
+
+  // Format as Philippine Peso
+  document.getElementById('grandTotal').innerText = `₱${total.toFixed(2)}`;
+}
 
   document.getElementById('grandTotal').innerText = total.toFixed(2);
 }
