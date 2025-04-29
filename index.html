@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Pricing Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form id="projectForm">
+
+  <h2>Project Information</h2>
+  <label>*Date:
+    <input type="date" id="date" name="date" required>
+  </label>
+  <label>*To:
+    <input type="text" name="to" required>
+  </label>
+  <label>*Project Title:
+    <input type="text" name="project_title" required>
+  </label>
+  <label>*Location:
+    <input type="text" name="location" required>
+  </label>
+
+  <h2>Pricing</h2>
+
+  <h3>Subsection A - Scope of Works</h3>
+  <table id="scopeTable">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" name="scope_description[]" required></td>
+        <td><input type="number" name="scope_price[]" step="0.01" required></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn" onclick="addRow('scopeTable', 2)">Add Row</button>
+
+  <h3>Subsection B - Equipment and Cost Breakdown</h3>
+  <table id="equipmentTable">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="number" name="equipment_qty[]" required></td>
+        <td><input type="text" name="equipment_description[]" required></td>
+        <td><input type="number" name="equipment_price[]" step="0.01" required></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn" onclick="addRow('equipmentTable', 3)">Add Row</button>
+
+  <h3>Subsection C - Discount</h3>
+  <label>Discount Applicable?
+    <select name="discount_applicable" id="discount_applicable" onchange="toggleDiscountInput()">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+  </label>
+  <div id="discountField" style="display:none;">
+    <label>Discount Amount:
+      <input type="number" name="discount_amount" step="0.01">
+    </label>
+  </div>
+
+  <h2>Grand Total and Payment Terms</h2>
+  <label>Grand Total:
+    <input type="text" id="grand_total" name="grand_total" readonly>
+  </label>
+  <label>Payment Terms:
+    <textarea name="payment_terms" required></textarea>
+  </label>
+
+  <button type="submit" class="btn">Submit</button>
+
+</form>
+
+<script>
+  // Prefill current date
+  document.getElementById('date').valueAsDate = new Date();
+
+  function addRow(tableId, cols) {
+    const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+    for (let i = 0; i < cols; i++) {
+      const newCell = newRow.insertCell();
+      const input = document.createElement('input');
+      input.type = (i === 0 && tableId === 'equipmentTable') ? 'number' : 'text';
+      input.name = tableId === 'scopeTable' ? (i === 0 ? 'scope_description[]' : 'scope_price[]')
+                                           : (i === 0 ? 'equipment_qty[]' : (i === 1 ? 'equipment_description[]' : 'equipment_price[]'));
+      if (i === 1 && tableId === 'scopeTable' || i === 2 && tableId === 'equipmentTable') {
+        input.type = 'number';
+        input.step = '0.01';
+      }
+      input.required = true;
+      newCell.appendChild(input);
+    }
+  }
+
+  function toggleDiscountInput() {
+    const discountField = document.getElementById('discountField');
+    const select = document.getElementById('discount_applicable');
+    discountField.style.display = select.value === 'yes' ? 'block' : 'none';
+  }
+
+  document.getElementById('projectForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let total = 0;
+    document.getElementsByName('scope_price[]').forEach(el => total += parseFloat(el.value) || 0);
+    document.getElementsByName('equipment_price[]').forEach(el => total += parseFloat(el.value) || 0);
+
+    const discountApplicable = document.getElementById('discount_applicable').value;
+    if (discountApplicable === 'yes') {
+      const discount = parseFloat(document.getElementsByName('discount_amount')[0].value) || 0;
+      total -= discount;
+    }
+
+    document.getElementById('grand_total').value = total.toFixed(2);
+
+    // Now submit form (AJAX or server call to be added)
+    alert('Form processed! Total: $' + total.toFixed(2));
+  });
+</script>
+
+</body>
+</html>
