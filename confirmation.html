@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="confirmationContent">
+    <h1>Project Quotation Summary</h1>
+
+    <p><strong>Date:</strong> <span id="confirmDate"></span></p>
+    <p><strong>To:</strong> <span id="confirmTo"></span></p>
+    <p><strong>Project Title:</strong> <span id="confirmTitle"></span></p>
+    <p><strong>Location:</strong> <span id="confirmLocation"></span></p>
+
+    <h2>Scope of Works</h2>
+    <table id="confirmScopeTable">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Equipment and Cost Breakdown</h2>
+    <table id="confirmEquipmentTable">
+      <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p><strong>Discount:</strong> <span id="confirmDiscount"></span></p>
+    <p><strong>Grand Total:</strong> <span id="confirmGrandTotal"></span></p>
+    <p><strong>Payment Terms:</strong> <span id="confirmPaymentTerms"></span></p>
+  </div>
+
+  <button onclick="downloadPDF()">Download PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="confirmation.js"></script>
+</body>
+</html>
