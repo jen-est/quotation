@@ -67,7 +67,7 @@ function calculateGrandTotal() {
 }
 
   document.getElementById('grandTotal').innerText = total.toFixed(2);
-}
+
 
 // Discount field triggers recalculation too
 document.getElementById('discount').addEventListener('input', calculateGrandTotal);
