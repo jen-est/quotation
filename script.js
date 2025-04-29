@@ -71,3 +71,39 @@ function calculateGrandTotal() {
 
 // Discount field triggers recalculation too
 document.getElementById('discount').addEventListener('input', calculateGrandTotal);
+
+function handleSubmit(event) {
+  event.preventDefault(); // Prevent default form submit
+
+  // Save form data into localStorage
+  const formData = {
+    date: document.getElementById('date').value,
+    to: document.getElementById('to').value,
+    title: document.getElementById('title').value,
+    location: document.getElementById('location').value,
+    scopeTable: getTableData('scopeTable'),
+    equipmentTable: getTableData('equipmentTable'),
+    discountOption: document.getElementById('discountOption').value,
+    discountAmount: document.getElementById('discount').value,
+    grandTotal: document.getElementById('grandTotal').innerText,
+    paymentTerms: document.getElementById('paymentTerms').value
+  };
+
+  localStorage.setItem('formData', JSON.stringify(formData));
+
+  // Redirect to confirmation page
+  window.location.href = 'confirmation.html';
+}
+
+// Helper function to get table data
+function getTableData(tableId) {
+  const table = document.getElementById(tableId);
+  const rows = table.querySelectorAll('tbody tr');
+  const data = [];
+  rows.forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const rowData = Array.from(inputs).map(input => input.value);
+    data.push(rowData);
+  });
+  return data;
+}
