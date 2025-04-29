@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <form id="projectForm">
+    <h1>Project Information</h1>
+    <label>
+      Date:
+      <input type="date" id="date" required>
+    </label>
+    <label>
+      *To:
+      <input type="text" id="to" required>
+    </label>
+    <label>
+      *Project Title:
+      <input type="text" id="title" required>
+    </label>
+    <label>
+      *Location:
+      <input type="text" id="location" required>
+    </label>
+
+    <h2>Pricing</h2>
+    <h3>Subsection A - SCOPE OF WORKS</h3>
+    <table id="scopeTable">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button type="button" onclick="addRow('scopeTable')">Add Row</button>
+
+    <h3>Subsection B - EQUIPMENT AND COST BREAKDOWN</h3>
+    <table id="equipmentTable">
+      <thead>
+        <tr>
+          <th>QTY</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button type="button" onclick="addRow('equipmentTable')">Add Row</button>
+
+    <h3>Subsection C - Discounts</h3>
+    <label>
+      Discount:
+      <select id="discountOption" onchange="toggleDiscount()">
+        <option value="none">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </label>
+    <div id="discountInput" style="display:none;">
+      <label>Discount Amount: <input type="number" id="discount" value="0"></label>
+    </div>
+
+    <h2>Grand Total and Payment Terms</h2>
+    <p>Grand Total: $<span id="grandTotal">0.00</span></p>
+    <label>
+      Payment Terms:
+      <textarea id="paymentTerms"></textarea>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
