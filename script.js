@@ -4,7 +4,7 @@ document.getElementById('date').value = new Date().toISOString().split('T')[0];
 // Add row function
 function addRow(tableId) {
   const table = document.getElementById(tableId).querySelector('tbody');
-  const columns = tableId === 'scopeTable' ? 2 : 3;
+  const columns = tableId === 'scopeTable' ? 2 : 3;  // 2 columns for scope, 3 columns for equipment
   const row = document.createElement('tr');
 
   for (let i = 0; i < columns; i++) {
@@ -13,25 +13,26 @@ function addRow(tableId) {
     input.type = i === columns - 1 ? 'number' : 'text'; // Last column (price) is number
     input.min = "0";
     input.step = "0.01";
-    input.addEventListener('input', calculateGrandTotal);
+    input.addEventListener('input', calculateGrandTotal);  // Recalculate grand total on input
     cell.appendChild(input);
     row.appendChild(cell);
   }
   table.appendChild(row);
 }
 
-// Toggle discount input
+// Toggle discount input visibility
 function toggleDiscount() {
   const discountInput = document.getElementById('discountInput');
   if (document.getElementById('discountOption').value === 'yes') {
-    discountInput.style.display = 'block';
+    discountInput.style.display = 'block';  // Show discount field
   } else {
-    discountInput.style.display = 'none';
-    document.getElementById('discount').value = 0;
+    discountInput.style.display = 'none';  // Hide discount field
+    document.getElementById('discount').value = 0;  // Reset discount to 0
   }
-  calculateGrandTotal();
+  calculateGrandTotal();  // Recalculate grand total when discount changes
 }
 
+// Calculate Grand Total
 function calculateGrandTotal() {
   let total = 0;
 
@@ -56,54 +57,3 @@ function calculateGrandTotal() {
   if (discountOption === 'yes') {
     const discount = parseFloat(document.getElementById('discount').value) || 0;
     total -= discount;
-  }
-
-  // Prevent negative total
-  if (total < 0) total = 0;
-
-  // Format as Philippine Peso with commas
-  const formattedTotal = total.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
-  document.getElementById('grandTotal').innerText = formattedTotal;
-}
-
-  document.getElementById('grandTotal').innerText = total.toFixed(2);
-
-
-// Discount field triggers recalculation too
-document.getElementById('discount').addEventListener('input', calculateGrandTotal);
-
-function handleSubmit(event) {
-  event.preventDefault(); // Prevent default form submit
-
-  // Save form data into localStorage
-  const formData = {
-    date: document.getElementById('date').value,
-    to: document.getElementById('to').value,
-    title: document.getElementById('title').value,
-    location: document.getElementById('location').value,
-    scopeTable: getTableData('scopeTable'),
-    equipmentTable: getTableData('equipmentTable'),
-    discountOption: document.getElementById('discountOption').value,
-    discountAmount: document.getElementById('discount').value,
-    grandTotal: document.getElementById('grandTotal').innerText,
-    paymentTerms: document.getElementById('paymentTerms').value
-  };
-
-  localStorage.setItem('formData', JSON.stringify(formData));
-
-  // Redirect to confirmation page
-  window.location.href = 'confirmation.html';
-}
-
-// Helper function to get table data
-function getTableData(tableId) {
-  const table = document.getElementById(tableId);
-  const rows = table.querySelectorAll('tbody tr');
-  const data = [];
-  rows.forEach(row => {
-    const inputs = row.querySelectorAll('input');
-    const rowData = Array.from(inputs).map(input => input.value);
-    data.push(rowData);
-  });
-  return data;
-}
