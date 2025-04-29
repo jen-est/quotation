@@ -61,8 +61,9 @@ function calculateGrandTotal() {
   // Prevent negative total
   if (total < 0) total = 0;
 
-  // Format as Philippine Peso
-  document.getElementById('grandTotal').innerText = `₱${total.toFixed(2)}`;
+  // Format as Philippine Peso with commas
+  const formattedTotal = total.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+  document.getElementById('grandTotal').innerText = formattedTotal;
 }
 
   document.getElementById('grandTotal').innerText = total.toFixed(2);
