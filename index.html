@@ -14,20 +14,20 @@
       <input type="date" id="date" required>
     </label>
     <label>
-      *To:
+      TO:
       <input type="text" id="to" required>
     </label>
     <label>
-      *Project Title:
+      SUBJECT:
       <input type="text" id="title" required>
     </label>
     <label>
-      *Location:
+      LOCATION:
       <input type="text" id="location" required>
     </label>
 
     <h2>Pricing</h2>
-    <h3>Subsection A - SCOPE OF WORKS</h3>
+    <h3>SCOPE OF WORKS</h3>
     <table id="scopeTable">
       <thead>
         <tr>
@@ -39,11 +39,12 @@
     </table>
     <button type="button" onclick="addRow('scopeTable')">Add Row</button>
 
-    <h3>Subsection B - EQUIPMENT AND COST BREAKDOWN</h3>
+    <h3>EQUIPMENT AND COST BREAKDOWN</h3>
     <table id="equipmentTable">
       <thead>
         <tr>
           <th>QTY</th>
+          <th>UOM</th>
           <th>Description</th>
           <th>Price</th>
         </tr>
@@ -51,17 +52,28 @@
       <tbody></tbody>
     </table>
     <button type="button" onclick="addRow('equipmentTable')">Add Row</button>
+    
 
-    <h3>Subsection C - Discounts</h3>
+    <h3>Discounts</h3>
     <label>
-      Discount:
+      Discount Applied?
       <select id="discountOption" onchange="toggleDiscount()">
         <option value="none">No</option>
         <option value="yes">Yes</option>
       </select>
     </label>
-    <div id="discountInput" style="display:none;">
-      <label>Discount Amount: <input type="number" id="discount" value="0"></label>
+    
+    <div id="discountInput" style="display:none; margin-top: 10px;">
+      <label>Discount Type:
+        <select id="discountType">
+          <option value="amount">₱ Amount</option>
+          <option value="percentage">Percentage (%)</option>
+        </select>
+      </label>
+      <br><br>
+      <label>Discount Value:
+        <input type="number" id="discount" value="0" min="0" step="0.01">
+      </label>
     </div>
 
     <h2>Grand Total and Payment Terms</h2>

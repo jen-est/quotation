@@ -35,8 +35,16 @@ table {
 
 table th, table td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 8px;
   text-align: left;
+}
+
+table input {
+  width: 100%; /* 👈 important: make input fit the table cell */
+  box-sizing: border-box; /* 👈 padding included inside width */
+  border: none; /* optional: no input border for cleaner look */
+  padding: 5px;
+  font-size: 1em;
 }
 
 button {
@@ -50,3 +58,4 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
