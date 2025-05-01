@@ -1,63 +1,97 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
   line-height: 1.6;
-}
-
-form {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
   color: #333;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
+/* Header Styling */
+header {
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 0;
 }
 
-input, select, textarea {
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 12px;
 }
 
-table {
+/* Content Container */
+#confirmationContent {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Table Styling */
+.styled-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-table th, table td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  margin: 20px 0;
+  font-size: 16px;
   text-align: left;
 }
 
-table input {
-  width: 100%; /* 👈 important: make input fit the table cell */
-  box-sizing: border-box; /* 👈 padding included inside width */
-  border: none; /* optional: no input border for cleaner look */
-  padding: 5px;
-  font-size: 1em;
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-button {
+.styled-table th {
   background-color: #4CAF50;
   color: white;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.styled-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Button Styling */
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
   border: none;
-  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
 .info-row {
@@ -73,4 +107,11 @@ button:hover {
 
 .info-row .value {
   flex: 1; /* Value takes up the remaining space */
+}
+
+/* Hide elements when printing (for PDF generation) */
+@media print {
+  button {
+    display: none;
+  }
 }

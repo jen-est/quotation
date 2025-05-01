@@ -4,32 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmation</title>
-  <link rel="stylesheet" href="styles2.css">
+  <link rel="stylesheet" href="styles2.css"> <!-- Link to the external CSS file -->
 </head>
 <body>
-  <div id="confirmationContent">
-    <h1>Project Quotation Summary</h1>
+  <header>
+    <h1>Company Name</h1>
+    <h2>Project Quotation</h2>
+  </header>
 
-    <p><strong></strong> <span id="confirmDate"></span></p>
+  <div id="confirmationContent">
+    <p><strong>Date:</strong> <span id="confirmDate"></span></p>
     <div class="info-row">
-      <span class="label">TO:</span>
+      <span class="label">To:</span>
       <span id="confirmTo" class="value"></span>
     </div>
     
     <div class="info-row">
-      <span class="label">SUBJECT:</span>
+      <span class="label">Project Title:</span>
       <span id="confirmTitle" class="value"></span>
     </div>
     
     <div class="info-row">
-      <span class="label">LOCATION:</span>
+      <span class="label">Location:</span>
       <span id="confirmLocation" class="value"></span>
     </div>
-    
 
     <div id="scopeSection">
       <h2>Scope of Works</h2>
-      <table id="confirmScopeTable">
+      <table id="confirmScopeTable" class="styled-table">
         <thead>
           <tr>
             <th>Description</th>
@@ -42,7 +44,7 @@
 
     <div id="equipmentSection">
       <h2>Equipment and Cost Breakdown</h2>
-      <table id="confirmEquipmentTable">
+      <table id="confirmEquipmentTable" class="styled-table">
         <thead>
           <tr>
             <th>QTY</th>
@@ -72,6 +74,10 @@
 
     <button onclick="downloadPDF()">Download PDF</button>
   </div>
+
+  <footer>
+    <p>Company Name - Address - Contact Info</p>
+  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <script src="confirmation.js"></script>
